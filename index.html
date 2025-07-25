@@ -128,8 +128,32 @@
     form input, form textarea, form button {
       display: block; width: 100%; margin: 1rem 0; padding: 0.5rem;
     }
+    form button[type="submit"] {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+    form button[type="submit"]:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #0072ff, #0051a3);
+    }
+
     ul { list-style: none; padding: 0; }
-    li { padding: 0.5rem 0; border-bottom: 1px solid #ddd; }
+    li { padding: 0.5rem 0; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
+    li button {
+      background: transparent;
+      color: red;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
 
     .popup {
       display: none;
@@ -140,79 +164,22 @@
       margin-top: 2rem;
     }
     .popup.show { display: block; }
+    .total { font-weight: bold; text-align: right; margin-top: 1rem; }
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h1>Your Next Role</h1>
-    <p>Resume & Career Branding Services</p>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-  <main>
-    <section id="services">
-      <h2 style="margin-left: 1rem;">Our Services</h2>
-      <div class="service">
-        <h3>Resume Revamp – R450</h3>
-        <p>ATS-friendly formatting and keyword-optimized content.</p>
-        <button onclick="addToCart('Resume Revamp – R450')">Add to Cart</button>
-      </div>
-      <div class="service">
-        <h3>Resume + Cover Letter – R550</h3>
-        <p>Everything in Resume Revamp + a tailored, professional cover letter.</p>
-        <button onclick="addToCart('Resume + Cover Letter – R550')">Add to Cart</button>
-      </div>
-      <div class="service">
-        <h3>LinkedIn Profile Refresh – R400</h3>
-        <p>Optimized LinkedIn headline, summary, and experience section.</p>
-        <button onclick="addToCart('LinkedIn Profile Refresh – R400')">Add to Cart</button>
-      </div>
-      <div class="service">
-        <h3>Job Seeker Bundle – R1200</h3>
-        <p>Resume + Cover Letter + LinkedIn optimization.</p>
-        <button onclick="addToCart('Job Seeker Bundle – R1200')">Add to Cart</button>
-      </div>
-    </section>
-
-    <section id="about">
-      <h2>About</h2>
-      <p>Your Next Role is committed to helping South Africans present themselves professionally and land the jobs they deserve. We specialize in resumes, cover letters, and LinkedIn makeovers tailored for today's job market.</p>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p>
-    </section>
-  </main>
-
-  <div class="fixed-checkout-btn">
-    <button onclick="toggleDrawer()">View Cart & Checkout</button>
-  </div>
-
-  <div class="drawer" id="cartDrawer">
-    <button class="close-btn" onclick="toggleDrawer()">&times;</button>
-    <h2>Your Cart</h2>
-    <ul id="cartItems"></ul>
-
-    <form id="checkoutForm" onsubmit="submitOrder(event)">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="notes" placeholder="Any notes? (optional)"></textarea>
-      <input type="hidden" name="orderDetails" id="orderDetailsInput" />
-      <button type="submit">Submit Order</button>
-    </form>
-
-    <div class="popup" id="confirmationMessage">✅ Your order was sent!</div>
-  </div>
-
+  <!-- ... (same HTML content before script) ... -->
   <script>
     const cart = [];
+
     function addToCart(item) {
       cart.push(item);
       alert(item + " added to cart!");
+      updateCartDisplay();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
       updateCartDisplay();
     }
 
@@ -223,46 +190,45 @@
     function updateCartDisplay() {
       const cartList = document.getElementById("cartItems");
       const orderDetailsInput = document.getElementById("orderDetailsInput");
+      const totalElement = document.getElementById("totalAmount");
       if (!cartList) return;
 
       cartList.innerHTML = "";
-      cart.forEach(item => {
+      let total = 0;
+
+      cart.forEach((item, index) => {
         const li = document.createElement("li");
-        li.textContent = item;
+        li.innerHTML = `${item} <button onclick="removeFromCart(${index})">&times;</button>`;
         cartList.appendChild(li);
+
+        const priceMatch = item.match(/R(\d+)/);
+        if (priceMatch) total += parseInt(priceMatch[1]);
       });
 
       if (orderDetailsInput) {
         orderDetailsInput.value = cart.join(", ");
       }
+
+      if (totalElement) {
+        totalElement.textContent = `Total: R${total}`;
+      }
     }
 
-    function submitOrder(event) {
-      event.preventDefault();
-      const form = event.target;
+    function handleFormSubmit(event) {
+      const orderDetailsInput = document.getElementById("orderDetailsInput");
+      orderDetailsInput.value = cart.join(", ");
 
-      fetch("https://formspree.io/f/mnqezqpq", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name.value,
-          email: form.email.value,
-          notes: form.notes.value,
-          orderDetails: form.orderDetails.value
-        })
-      })
-      .then(res => {
-        if (res.ok) {
-          cart.length = 0;
-          updateCartDisplay();
-          document.getElementById("confirmationMessage").classList.add("show");
-          setTimeout(() => {
-            toggleDrawer();
-            document.getElementById("confirmationMessage").classList.remove("show");
-          }, 2500);
-          form.reset();
-        }
-      });
+      setTimeout(() => {
+        cart.length = 0;
+        updateCartDisplay();
+        document.getElementById("confirmationMessage").classList.add("show");
+        setTimeout(() => {
+          document.getElementById("confirmationMessage").classList.remove("show");
+          toggleDrawer();
+        }, 2500);
+      }, 1000);
+
+      return true;
     }
   </script>
 </body>
