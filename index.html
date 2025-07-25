@@ -168,7 +168,54 @@
   </style>
 </head>
 <body>
-  <!-- ... (same HTML content before script) ... -->
+  <div class="sidebar">
+    <h1>Your Next Role</h1>
+    <p>Get hired faster with professional resume services</p>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+    <header>
+      <h2>Welcome to Your Next Role</h2>
+      <p>Resume Writing • Cover Letters • LinkedIn Profiles</p>
+    </header>
+
+    <section id="services">
+      <div class="service"><h3>Resume Revamp – R450</h3><p>ATS-friendly formatting and keyword-optimized content.</p><button onclick="addToCart('Resume Revamp – R450')">Add to Cart</button></div>
+      <div class="service"><h3>Resume + Cover Letter – R550</h3><p>Resume Revamp + tailored cover letter.</p><button onclick="addToCart('Resume + Cover Letter – R550')">Add to Cart</button></div>
+      <div class="service"><h3>LinkedIn Profile Refresh – R400</h3><p>Optimized LinkedIn headline, summary, and experience.</p><button onclick="addToCart('LinkedIn Profile Refresh – R400')">Add to Cart</button></div>
+      <div class="service"><h3>Job Seeker Bundle – R1200</h3><p>Resume + Cover Letter + LinkedIn.</p><button onclick="addToCart('Job Seeker Bundle – R1200')">Add to Cart</button></div>
+    </section>
+
+    <section id="about"><h2>About Us</h2><p>We're passionate about helping professionals stand out in a competitive job market. Our expert-written resumes and profiles land interviews.</p></section>
+
+    <section id="contact"><h2>Contact</h2><p>Email us: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p></section>
+
+    <footer>&copy; 2025 Your Next Role. All rights reserved.</footer>
+  </main>
+
+  <div class="fixed-checkout-btn">
+    <button onclick="toggleDrawer()">🛒 View Cart & Checkout</button>
+  </div>
+
+  <div id="cartDrawer" class="drawer">
+    <button class="close-btn" onclick="toggleDrawer()">&times;</button>
+    <h2>Your Cart</h2>
+    <ul id="cartItems"></ul>
+    <div class="total" id="totalAmount"></div>
+    <form onsubmit="return handleFormSubmit(event)" action="https://formspree.io/f/xeqybzgv" method="POST">
+      <input type="hidden" name="orderDetails" id="orderDetailsInput" />
+      <input type="email" name="email" placeholder="Your email" required />
+      <textarea name="message" placeholder="Additional notes"></textarea>
+      <button type="submit">Submit Order</button>
+    </form>
+    <div id="confirmationMessage" class="popup">Thank you! Your order was submitted.</div>
+  </div>
+
   <script>
     const cart = [];
 
