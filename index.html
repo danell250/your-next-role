@@ -165,4 +165,115 @@
   </style>
 </head>
 <body>
-  <!-- ... rest of body content remains unchanged ... -->
+  <div class="sidebar">
+    <h1>Your Next Role</h1>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <main>
+    <header>
+      <h2>Professional Resume Services</h2>
+    </header>
+    <section id="services">
+      <div class="service">
+        <h3>Resume Revamp – R450</h3>
+        <p>ATS-friendly formatting and keyword-optimized content.</p>
+        <button onclick="addToCart('Resume Revamp', 450)">Add to Cart</button>
+      </div>
+      <div class="service">
+        <h3>Resume + Cover Letter – R550</h3>
+        <p>Everything in Resume Revamp + a tailored, professional cover letter.</p>
+        <button onclick="addToCart('Resume + Cover Letter', 550)">Add to Cart</button>
+      </div>
+      <div class="service">
+        <h3>LinkedIn Profile Refresh – R400</h3>
+        <p>Optimized LinkedIn headline, summary, and experience section.</p>
+        <button onclick="addToCart('LinkedIn Refresh', 400)">Add to Cart</button>
+      </div>
+      <div class="service">
+        <h3>Job Seeker Bundle – R1200</h3>
+        <p>Resume + Cover Letter + LinkedIn.</p>
+        <button onclick="addToCart('Job Seeker Bundle', 1200)">Add to Cart</button>
+      </div>
+    </section>
+    <section id="about">
+      <h3>About</h3>
+      <p>At Your Next Role, we help job seekers shine with tailored resumes and career branding that gets attention.</p>
+    </section>
+    <section id="contact">
+      <h3>Contact</h3>
+      <p>Email: danelloosthuizen3@gmail.com</p>
+    </section>
+    <footer>&copy; 2025 Your Next Role. All rights reserved.</footer>
+  </main>
+  <div class="fixed-checkout-btn">
+    <button onclick="toggleDrawer()">View Cart & Checkout</button>
+  </div>
+  <div class="drawer" id="cartDrawer">
+    <button class="close-btn" onclick="toggleDrawer()">&times;</button>
+    <h3>Your Cart</h3>
+    <ul id="cartItems"></ul>
+    <p><strong>Total: R<span id="cartTotal">0</span></strong></p>
+    <form action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST" onsubmit="return handleFormSubmit(event)">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" id="orderDetails" rows="4" readonly></textarea>
+      <input type="hidden" name="_captcha" value="false">
+      <button type="submit">Submit Order</button>
+    </form>
+    <div id="popup" class="popup">Thank you! Your order has been submitted.</div>
+  </div>
+  <script>
+    let cart = [];
+    function addToCart(item, price) {
+      cart.push({ item, price });
+      updateCart();
+    }
+    function updateCart() {
+      const list = document.getElementById('cartItems');
+      const total = document.getElementById('cartTotal');
+      const details = document.getElementById('orderDetails');
+      list.innerHTML = '';
+      let sum = 0;
+      cart.forEach((entry, index) => {
+        sum += entry.price;
+        const li = document.createElement('li');
+        li.innerHTML = `${entry.item} - R${entry.price} <button onclick="removeItem(${index})">Remove</button>`;
+        list.appendChild(li);
+      });
+      total.textContent = sum;
+      details.value = cart.map(c => `${c.item} – R${c.price}`).join('\n');
+    }
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+    function toggleDrawer() {
+      document.getElementById('cartDrawer').classList.toggle('show');
+    }
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+      }).then(response => {
+        if (response.ok) {
+          cart = [];
+          updateCart();
+          form.reset();
+          document.getElementById('popup').classList.add('show');
+          setTimeout(() => {
+            document.getElementById('popup').classList.remove('show');
+            toggleDrawer();
+          }, 3000);
+        }
+      });
+      return false;
+    }
+  </script>
+</body>
+</html>
