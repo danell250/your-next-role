@@ -43,7 +43,7 @@
     main {
       margin-left: 240px;
       flex: 1;
-      padding: 2rem;
+      padding: 2rem 3rem;
     }
 
     header, footer {
@@ -55,10 +55,16 @@
 
     .service {
       background: white;
-      padding: 1.2rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin: 1.5rem auto;
+      max-width: 700px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
     .service button {
       background: #0070f3;
@@ -148,7 +154,7 @@
   </div>
   <main>
     <section id="services">
-      <h2>Our Services</h2>
+      <h2 style="margin-left: 1rem;">Our Services</h2>
       <div class="service">
         <h3>Resume Revamp – R450</h3>
         <p>ATS-friendly formatting and keyword-optimized content.</p>
