@@ -187,5 +187,83 @@
       <p>Email: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p>
     </section>
   </main>
+
+  <div class="fixed-checkout-btn">
+    <button onclick="toggleDrawer()">View Cart & Checkout</button>
+  </div>
+
+  <div class="drawer" id="cartDrawer">
+    <button class="close-btn" onclick="toggleDrawer()">&times;</button>
+    <h2>Your Cart</h2>
+    <ul id="cartItems"></ul>
+
+    <form id="checkoutForm" onsubmit="submitOrder(event)">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="notes" placeholder="Any notes? (optional)"></textarea>
+      <input type="hidden" name="orderDetails" id="orderDetailsInput" />
+      <button type="submit">Submit Order</button>
+    </form>
+
+    <div class="popup" id="confirmationMessage">✅ Your order was sent!</div>
+  </div>
+
+  <script>
+    const cart = [];
+    function addToCart(item) {
+      cart.push(item);
+      alert(item + " added to cart!");
+      updateCartDisplay();
+    }
+
+    function toggleDrawer() {
+      document.getElementById("cartDrawer").classList.toggle("show");
+    }
+
+    function updateCartDisplay() {
+      const cartList = document.getElementById("cartItems");
+      const orderDetailsInput = document.getElementById("orderDetailsInput");
+      if (!cartList) return;
+
+      cartList.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        cartList.appendChild(li);
+      });
+
+      if (orderDetailsInput) {
+        orderDetailsInput.value = cart.join(", ");
+      }
+    }
+
+    function submitOrder(event) {
+      event.preventDefault();
+      const form = event.target;
+
+      fetch("https://formspree.io/f/mnqezqpq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.value,
+          email: form.email.value,
+          notes: form.notes.value,
+          orderDetails: form.orderDetails.value
+        })
+      })
+      .then(res => {
+        if (res.ok) {
+          cart.length = 0;
+          updateCartDisplay();
+          document.getElementById("confirmationMessage").classList.add("show");
+          setTimeout(() => {
+            toggleDrawer();
+            document.getElementById("confirmationMessage").classList.remove("show");
+          }, 2500);
+          form.reset();
+        }
+      });
+    }
+  </script>
 </body>
 </html>
