@@ -60,14 +60,16 @@
     <h2>Checkout</h2>
     <div id="cart-items"></div>
     <p><strong>Total:</strong> R<span id="total">0</span></p>
-    <form class="checkout-form" onsubmit="return submitCheckout()">
+    <form class="checkout-form" action="https://formspree.io/f/xeqybqqn" method="POST">
       <label for="name">Full Name</label>
-      <input type="text" id="name" required>
+      <input type="text" id="name" name="name" required>
 
       <label for="email">Email</label>
-      <input type="email" id="email" required>
+      <input type="email" id="email" name="email" required>
 
-      <button type="submit" class="btn">Checkout with PayPal</button>
+      <input type="hidden" name="cart" id="cartData">
+
+      <button type="submit" class="btn">Submit Order</button>
     </form>
   </section>
 
@@ -93,49 +95,21 @@
       const cartItems = document.getElementById("cart-items");
       cartItems.innerHTML = "";
       let total = 0;
+      let cartString = "";
       cart.forEach((item, index) => {
         total += item.price;
+        cartString += `${item.service} - R${item.price}\n`;
         const div = document.createElement("div");
         div.innerHTML = `${item.service} - R${item.price} <span onclick="removeItem(${index})" style="cursor:pointer;color:red;">×</span>`;
         cartItems.appendChild(div);
       });
       document.getElementById("total").textContent = total;
+      document.getElementById("cartData").value = cartString;
     }
 
     function removeItem(index) {
       cart.splice(index, 1);
       updateCart();
-    }
-
-    function submitCheckout() {
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      const description = cart.map(item => item.service).join(", ");
-      const form = document.createElement('form');
-      form.action = "https://www.paypal.com/cgi-bin/webscr";
-      form.method = "POST";
-      form.target = "_blank";
-
-      const inputs = [
-        { name: "cmd", value: "_xclick" },
-        { name: "business", value: "danelloosthuizen3@gmail.com" },
-        { name: "currency_code", value: "ZAR" },
-        { name: "amount", value: total },
-        { name: "item_name", value: description },
-      ];
-
-      inputs.forEach(i => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = i.name;
-        input.value = i.value;
-        form.appendChild(input);
-      });
-
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
-
-      return false; // Prevent normal form submission
     }
   </script>
 </body>
