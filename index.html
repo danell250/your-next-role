@@ -15,8 +15,15 @@
     section { max-width: 900px; margin: 2rem auto; padding: 1rem; }
     .service { background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 1rem; }
     .service button { background: #0070f3; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; }
-    .checkout-btn { margin-top: 2rem; display: block; text-align: center; }
-    .checkout-btn button {
+
+    /* Fixed Checkout Button */
+    .fixed-checkout-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .fixed-checkout-btn button {
       background: linear-gradient(to right, #0070f3, #0051a3);
       color: white;
       padding: 1rem 2rem;
@@ -24,9 +31,10 @@
       border-radius: 30px;
       font-size: 1.1rem;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: background 0.3s ease;
     }
-    .checkout-btn button:hover {
+    .fixed-checkout-btn button:hover {
       background: linear-gradient(to right, #0051a3, #003e7e);
     }
 
@@ -103,10 +111,11 @@
       <p>Resume, Cover Letter, and LinkedIn profile – all in one package.</p>
       <button onclick="addToCart('Job Seeker Bundle', 1200)">Add to Cart</button>
     </div>
-    <div class="checkout-btn">
-      <button onclick="toggleDrawer()">🛒 View Cart & Checkout</button>
-    </div>
   </section>
+
+  <div class="fixed-checkout-btn">
+    <button onclick="toggleDrawer()">🛒 View Cart & Checkout</button>
+  </div>
 
   <section id="about">
     <h2>About Us</h2>
@@ -132,6 +141,7 @@
       <input type="hidden" name="_subject" value="New Order from Your Next Role">
       <input type="hidden" name="_template" value="box">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="order_summary" id="order_summary" />
       <label>Name:</label>
       <input type="text" name="name" required />
       <label>Email:</label>
@@ -155,7 +165,8 @@
     function addToCart(service, price) {
       cart.push({ service, price });
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert(service + " added to cart!");
+      displayCart();
+      toggleDrawer();
     }
 
     function displayCart() {
@@ -174,6 +185,9 @@
 
     function submitOrder(e) {
       e.preventDefault();
+      const orderSummary = cart.map(item => `${item.service} – R${item.price}`).join(", ");
+      document.getElementById("order_summary").value = orderSummary;
+
       e.target.submit();
       localStorage.removeItem("cart");
       cart = [];
