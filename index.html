@@ -1,101 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Professional resume, cover letter, and LinkedIn optimization services." />
-  <meta property="og:title" content="Your Next Role" />
-  <meta property="og:description" content="Stand out and land your dream job with expert resume services." />
-  <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
-  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Next Role</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-    header {
-      background: #004080;
-      color: white;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav a {
-      color: white;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
-    .services, .about, .testimonials, .contact {
-      padding: 2rem;
-    }
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-    .btn {
-      background: linear-gradient(to right, #0066cc, #0099ff);
-      border: none;
-      color: white;
-      padding: 0.5rem 1rem;
-      margin-left: 1rem;
-      border-radius: 25px;
-      cursor: pointer;
-    }
-    .btn:hover {
-      opacity: 0.9;
-    }
-    .cart-popup {
-      display: none;
-      position: fixed;
-      top: 60px;
-      right: 20px;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 1rem;
-      z-index: 1000;
-      width: 300px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
-    .cart-icon {
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .testimonial {
-      background: #f9f9f9;
-      padding: 1rem;
-      border-left: 5px solid #004080;
-      margin-bottom: 1rem;
-    }
-    footer {
-      background: #eee;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
+    body { font-family: sans-serif; margin: 0; padding: 0; line-height: 1.6; background: #f4f4f4; }
+    header, footer { background: #003366; color: white; padding: 1rem; text-align: center; }
+    nav a { margin: 0 1rem; color: white; text-decoration: none; }
+    section { padding: 2rem; background: white; margin: 1rem auto; max-width: 800px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .btn { background: #0070f3; color: white; border: none; padding: 0.5rem 1rem; margin: 0.5rem; cursor: pointer; border-radius: 6px; }
+    .btn:hover { background: #005bb5; }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 1rem; }
+    .checkout-form label, .checkout-form input { display: block; margin: 0.5rem 0; }
+    .checkout-form input { padding: 0.5rem; width: 100%; max-width: 400px; }
+    .testimonial { background: #e6f0ff; padding: 1rem; margin: 1rem 0; border-left: 5px solid #003366; }
   </style>
 </head>
 <body>
   <header>
     <h1>Your Next Role</h1>
     <nav>
-      <a href="#services">Services</a>
       <a href="#about">About</a>
+      <a href="#services">Services</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="cart-icon" onclick="toggleCart()">Cart 🛒</div>
   </header>
 
-  <div class="cart-popup" id="cart">
-    <h3>Your Cart</h3>
-    <div id="cart-items"></div>
-    <p><strong>Total:</strong> R<span id="total">0</span></p>
-    <button class="btn" onclick="checkout()">Checkout with PayPal</button>
-  </div>
+  <section class="about" id="about">
+    <h2>About Us</h2>
+    <p>We help job seekers stand out with professionally written, ATS-optimized resumes, compelling cover letters, and impactful LinkedIn profiles.</p>
+  </section>
 
   <section class="services" id="services">
     <h2>Our Services</h2>
@@ -105,11 +42,6 @@
       <li>LinkedIn Profile Refresh – R400 <button class="btn" onclick="addToCart('LinkedIn Profile Refresh', 400)">Add to Cart</button></li>
       <li>Job Seeker Bundle – R1200 <button class="btn" onclick="addToCart('Job Seeker Bundle', 1200)">Add to Cart</button></li>
     </ul>
-  </section>
-
-  <section class="about" id="about">
-    <h2>About Us</h2>
-    <p>We help job seekers stand out with professionally written, ATS-optimized resumes, compelling cover letters, and impactful LinkedIn profiles.</p>
   </section>
 
   <section class="testimonials" id="testimonials">
@@ -124,17 +56,24 @@
     </div>
   </section>
 
+  <section class="checkout" id="checkout">
+    <h2>Checkout</h2>
+    <div id="cart-items"></div>
+    <p><strong>Total:</strong> R<span id="total">0</span></p>
+    <form class="checkout-form" onsubmit="return submitCheckout()">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <button type="submit" class="btn">Checkout with PayPal</button>
+    </form>
+  </section>
+
   <section class="contact" id="contact">
     <h2>Contact Us</h2>
-    <form action="https://formspree.io/f/mwkgeqjy" method="POST">
-      <label>Name</label>
-      <input type="text" name="name" required>
-      <label>Email</label>
-      <input type="email" name="email" required>
-      <label>Message</label>
-      <textarea name="message" rows="5" required></textarea>
-      <button type="submit" class="btn">Send</button>
-    </form>
+    <p>Email us at: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p>
   </section>
 
   <footer class="footer">
@@ -143,14 +82,11 @@
 
   <script>
     const cart = [];
-    function toggleCart() {
-      const cartPopup = document.getElementById("cart");
-      cartPopup.style.display = cartPopup.style.display === "block" ? "none" : "block";
-    }
 
     function addToCart(service, price) {
       cart.push({ service, price });
       updateCart();
+      window.location.hash = 'checkout';
     }
 
     function updateCart() {
@@ -160,7 +96,6 @@
       cart.forEach((item, index) => {
         total += item.price;
         const div = document.createElement("div");
-        div.className = "cart-item";
         div.innerHTML = `${item.service} - R${item.price} <span onclick="removeItem(${index})" style="cursor:pointer;color:red;">×</span>`;
         cartItems.appendChild(div);
       });
@@ -172,7 +107,7 @@
       updateCart();
     }
 
-    function checkout() {
+    function submitCheckout() {
       const total = cart.reduce((sum, item) => sum + item.price, 0);
       const description = cart.map(item => item.service).join(", ");
       const form = document.createElement('form');
@@ -199,6 +134,8 @@
       document.body.appendChild(form);
       form.submit();
       document.body.removeChild(form);
+
+      return false; // Prevent normal form submission
     }
   </script>
 </body>
