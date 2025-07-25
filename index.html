@@ -3,14 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Next Role | Resume Writing Services</title>
+  <title>Your Next Role | yournextrole.netlify.app</title>
+  <meta name="description" content="Professional resume writing, cover letters, and LinkedIn optimization services tailored to help you land your next role." />
+  <meta property="og:title" content="Your Next Role | Resume & Career Branding Services" />
+  <meta property="og:description" content="Get ATS-optimized resumes, personalized cover letters, and standout LinkedIn profiles. Start landing more interviews today!" />
+  <meta property="og:image" content="https://yournextrole.netlify.app/og-image.jpg" />
+  <meta property="og:url" content="https://yournextrole.netlify.app" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Your Next Role | Resume & Career Branding Services" />
+  <meta name="twitter:description" content="Professional resume writing and job search branding to help you land your next opportunity." />
+  <meta name="twitter:image" content="https://yournextrole.netlify.app/og-image.jpg" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <style>
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
       background-color: #f7f9fc;
       color: #1f2937;
+      scroll-behavior: smooth;
     }
     header {
       background-color: #1e3a8a;
@@ -41,12 +52,27 @@
     h2 {
       color: #1e3a8a;
     }
-    .services, .about, .contact {
+    .services, .about, .contact, .testimonials, .book {
       background: white;
       padding: 2rem;
       margin-bottom: 2rem;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .testimonial {
+      background-color: #f1f5f9;
+      padding: 1rem;
+      border-left: 4px solid #2563eb;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+    }
+    .testimonial p {
+      margin: 0 0 0.5rem;
+    }
+    .testimonial cite {
+      font-style: normal;
+      color: #555;
+      font-size: 0.9rem;
     }
     .footer {
       text-align: center;
@@ -66,6 +92,27 @@
     .btn:hover {
       background-color: #1d4ed8;
     }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+    }
+    form button {
+      padding: 0.75rem 1.5rem;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #1d4ed8;
+    }
   </style>
 </head>
 <body>
@@ -75,16 +122,18 @@
     <nav>
       <a href="#about">About</a>
       <a href="#services">Services</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#book">Book Now</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <section class="about" id="about">
+  <section class="about" id="about" data-aos="fade-up">
     <h2>About</h2>
     <p>Hi, I'm Danell — a resume writer with a background in IT support and administrative roles. I help professionals create powerful, ATS-optimized resumes, personalized cover letters, and LinkedIn profiles that actually get attention. My goal is to help you land interviews and feel confident in your job search journey.</p>
   </section>
 
-  <section class="services" id="services">
+  <section class="services" id="services" data-aos="fade-up">
     <h2>Services</h2>
     <ul>
       <li><strong>Resume Revamp – R450:</strong> ATS-friendly formatting and keyword-optimized content.</li>
@@ -92,17 +141,50 @@
       <li><strong>LinkedIn Profile Refresh – R400:</strong> Optimized LinkedIn headline, summary, and experience section.</li>
       <li><strong>Job Seeker Bundle – R1200:</strong> Resume + Cover Letter + LinkedIn.</li>
     </ul>
-    <a href="#contact" class="btn">Book a Free Resume Audit</a>
+    <a href="#book" class="btn">Book a Free Resume Audit</a>
   </section>
 
-  <section class="contact" id="contact">
+  <section class="testimonials" id="testimonials" data-aos="fade-up">
+    <h2>Testimonials</h2>
+    <div class="testimonial">
+      <p>“Danell completely transformed my resume. I landed three interviews within the first week!”</p>
+      <cite>— Thandi, Marketing Professional</cite>
+    </div>
+    <div class="testimonial">
+      <p>“The cover letter was so well written — it felt like it told my story better than I could!”</p>
+      <cite>— Sipho, Recent Graduate</cite>
+    </div>
+    <div class="testimonial">
+      <p>“Quick, professional, and exactly what I needed to refresh my LinkedIn profile.”</p>
+      <cite>— Lerato, Business Analyst</cite>
+    </div>
+  </section>
+
+  <section class="book" id="book" data-aos="fade-up">
+    <h2>Book Now</h2>
+    <form name="book-now" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="book-now" />
+      <label>Your Name:<br><input type="text" name="name" required></label>
+      <label>Email Address:<br><input type="email" name="email" required></label>
+      <label>Service Interested In:<br><input type="text" name="service" required></label>
+      <label>Message:<br><textarea name="message" rows="4"></textarea></label>
+      <button type="submit">Submit Booking</button>
+    </form>
+  </section>
+
+  <section class="contact" id="contact" data-aos="fade-up">
     <h2>Contact</h2>
     <p>Ready to upgrade your resume and land your next role?</p>
     <p>Email: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p>
   </section>
 
   <div class="footer">
-    &copy; 2025 Your Next Role | All rights reserved
+    &copy; 2025 Your Next Role | Visit us at <a href="https://yournextrole.netlify.app" target="_blank">yournextrole.netlify.app</a>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 </html>
