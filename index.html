@@ -4,23 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Next Role</title>
+  <meta property="og:title" content="Your Next Role – Resume Writing Services">
+  <meta property="og:description" content="Stand out with professional resumes, cover letters, and LinkedIn makeovers tailored to your next role.">
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+  <meta property="og:url" content="https://yourdomain.com">
   <style>
     body { font-family: sans-serif; margin: 0; padding: 0; line-height: 1.6; background: #f4f4f4; }
     header, footer { background: #003366; color: white; padding: 1rem; text-align: center; }
     nav a { margin: 0 1rem; color: white; text-decoration: none; }
+    .cart-button { float: right; margin-right: 2rem; background: #0070f3; color: white; padding: 0.3rem 0.7rem; border: none; border-radius: 5px; cursor: pointer; }
+    .cart-button:hover { background: #005bb5; }
     section { padding: 2rem; background: white; margin: 1rem auto; max-width: 800px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
     .btn { background: #0070f3; color: white; border: none; padding: 0.5rem 1rem; margin: 0.5rem; cursor: pointer; border-radius: 6px; }
     .btn:hover { background: #005bb5; }
     ul { list-style: none; padding: 0; }
     li { margin-bottom: 1rem; }
-    .checkout-form label, .checkout-form input { display: block; margin: 0.5rem 0; }
-    .checkout-form input { padding: 0.5rem; width: 100%; max-width: 400px; }
     .testimonial { background: #e6f0ff; padding: 1rem; margin: 1rem 0; border-left: 5px solid #003366; }
+    .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border: 2px solid #0070f3; padding: 1.5rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; display: none; }
+    .popup.show { display: block; }
+    .popup button { background: #0070f3; color: white; border: none; padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer; border-radius: 6px; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Your Next Role</h1>
+    <h1>Your Next Role <a href="checkout.html"><button class="cart-button">Cart (<span id="cart-count">0</span>)</button></a></h1>
     <nav>
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -56,27 +63,15 @@
     </div>
   </section>
 
-  <section class="checkout" id="checkout">
-    <h2>Checkout</h2>
-    <div id="cart-items"></div>
-    <p><strong>Total:</strong> R<span id="total">0</span></p>
-    <form class="checkout-form" action="https://formspree.io/f/xeqybqqn" method="POST">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-
-      <input type="hidden" name="cart" id="cartData">
-
-      <button type="submit" class="btn">Submit Order</button>
-    </form>
-  </section>
-
   <section class="contact" id="contact">
     <h2>Contact Us</h2>
     <p>Email us at: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p>
   </section>
+
+  <div id="popup" class="popup">
+    <p>Thank you for your order! We've received your request.</p>
+    <button onclick="document.getElementById('popup').classList.remove('show')">Close</button>
+  </div>
 
   <footer class="footer">
     &copy; 2025 Your Next Role • danelloosthuizen3@gmail.com
@@ -87,29 +82,19 @@
 
     function addToCart(service, price) {
       cart.push({ service, price });
-      updateCart();
-      window.location.hash = 'checkout';
+      updateCartCount();
     }
 
-    function updateCart() {
-      const cartItems = document.getElementById("cart-items");
-      cartItems.innerHTML = "";
-      let total = 0;
-      let cartString = "";
-      cart.forEach((item, index) => {
-        total += item.price;
-        cartString += `${item.service} - R${item.price}\n`;
-        const div = document.createElement("div");
-        div.innerHTML = `${item.service} - R${item.price} <span onclick="removeItem(${index})" style="cursor:pointer;color:red;">×</span>`;
-        cartItems.appendChild(div);
-      });
-      document.getElementById("total").textContent = total;
-      document.getElementById("cartData").value = cartString;
+    function updateCartCount() {
+      const cartCount = document.getElementById("cart-count");
+      if (cartCount) cartCount.textContent = cart.length;
     }
 
-    function removeItem(index) {
-      cart.splice(index, 1);
-      updateCart();
+    function showThankYouPopup() {
+      const popup = document.getElementById("popup");
+      popup.classList.add("show");
+      cart.length = 0;
+      updateCartCount();
     }
   </script>
 </body>
