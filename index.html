@@ -1,101 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Next Role</title>
-  <meta property="og:title" content="Your Next Role – Resume Writing Services">
-  <meta property="og:description" content="Stand out with professional resumes, cover letters, and LinkedIn makeovers tailored to your next role.">
-  <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
-  <meta property="og:url" content="https://yourdomain.com">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Next Role – Resume Writing Services</title>
+  <meta name="description" content="Professional resume writing, cover letters, and LinkedIn profile optimization. Get hired faster with Your Next Role!">
+  <meta property="og:image" content="/og-image.jpg">
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; line-height: 1.6; background: #f4f4f4; }
-    header, footer { background: #003366; color: white; padding: 1rem; text-align: center; }
-    nav a { margin: 0 1rem; color: white; text-decoration: none; }
-    .cart-button { float: right; margin-right: 2rem; background: #0070f3; color: white; padding: 0.3rem 0.7rem; border: none; border-radius: 5px; cursor: pointer; }
-    .cart-button:hover { background: #005bb5; }
-    section { padding: 2rem; background: white; margin: 1rem auto; max-width: 800px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .btn { background: #0070f3; color: white; border: none; padding: 0.5rem 1rem; margin: 0.5rem; cursor: pointer; border-radius: 6px; }
-    .btn:hover { background: #005bb5; }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7fc; }
+    header, footer { background: #0070f3; color: white; padding: 1.5rem; text-align: center; }
+    h1, h2 { margin: 0.5em 0; }
+    nav { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+    section { max-width: 900px; margin: 2rem auto; padding: 1rem; }
+    .service { background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 1rem; }
+    .service button { background: #0070f3; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; }
+    .checkout-btn { margin-top: 2rem; display: block; text-align: center; }
+    .checkout-btn button {
+      background: linear-gradient(to right, #0070f3, #00b4db);
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 112, 243, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .checkout-btn button:hover {
+      background: linear-gradient(to right, #005bb5, #0098c2);
+      transform: scale(1.05);
+    }
+
+    /* Drawer Styles */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100vh;
+      width: 400px;
+      background: white;
+      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+      padding: 2rem;
+      transition: right 0.4s ease;
+      overflow-y: auto;
+      z-index: 999;
+    }
+    .drawer.show { right: 0; }
+    .drawer h2 { margin-top: 0; }
+    .close-btn {
+      background: transparent;
+      color: #333;
+      border: none;
+      font-size: 1.5rem;
+      float: right;
+      cursor: pointer;
+    }
+    form input, form textarea, form button {
+      display: block; width: 100%; margin: 1rem 0; padding: 0.5rem;
+    }
     ul { list-style: none; padding: 0; }
-    li { margin-bottom: 1rem; }
-    .testimonial { background: #e6f0ff; padding: 1rem; margin: 1rem 0; border-left: 5px solid #003366; }
-    .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border: 2px solid #0070f3; padding: 1.5rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; display: none; }
+    li { padding: 0.5rem 0; border-bottom: 1px solid #ddd; }
+    .popup {
+      display: none;
+      text-align: center;
+      background: #dff0d8;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
     .popup.show { display: block; }
-    .popup button { background: #0070f3; color: white; border: none; padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer; border-radius: 6px; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Your Next Role <a href="checkout.html"><button class="cart-button">Cart (<span id="cart-count">0</span>)</button></a></h1>
+    <h1>Your Next Role</h1>
+    <p>Professional Resume & Career Branding Services</p>
     <nav>
-      <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#testimonials">Testimonials</a>
+      <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <section class="about" id="about">
-    <h2>About Us</h2>
-    <p>We help job seekers stand out with professionally written, ATS-optimized resumes, compelling cover letters, and impactful LinkedIn profiles.</p>
-  </section>
-
-  <section class="services" id="services">
+  <section id="services">
     <h2>Our Services</h2>
-    <ul>
-      <li>Resume Revamp – R450 <button class="btn" onclick="addToCart('Resume Revamp', 450)">Add to Cart</button></li>
-      <li>Resume + Cover Letter – R550 <button class="btn" onclick="addToCart('Resume + Cover Letter', 550)">Add to Cart</button></li>
-      <li>LinkedIn Profile Refresh – R400 <button class="btn" onclick="addToCart('LinkedIn Profile Refresh', 400)">Add to Cart</button></li>
-      <li>Job Seeker Bundle – R1200 <button class="btn" onclick="addToCart('Job Seeker Bundle', 1200)">Add to Cart</button></li>
-    </ul>
-  </section>
-
-  <section class="testimonials" id="testimonials">
-    <h2>Testimonials</h2>
-    <div class="testimonial">
-      <p>“My resume landed me 3 interviews in one week! Thank you!”</p>
-      <cite>– Lindiwe M.</cite>
+    <div class="service">
+      <h3>Resume Revamp – R450</h3>
+      <p>ATS-friendly formatting and keyword-optimized content.</p>
+      <button onclick="addToCart('Resume Revamp', 450)">Add to Cart</button>
     </div>
-    <div class="testimonial">
-      <p>“Super professional and fast turnaround. Highly recommend.”</p>
-      <cite>– Sizwe T.</cite>
+    <div class="service">
+      <h3>Resume + Cover Letter – R550</h3>
+      <p>Includes Resume Revamp and a professional cover letter.</p>
+      <button onclick="addToCart('Resume + Cover Letter', 550)">Add to Cart</button>
+    </div>
+    <div class="service">
+      <h3>LinkedIn Profile Refresh – R400</h3>
+      <p>Optimized LinkedIn headline, summary, and experience section.</p>
+      <button onclick="addToCart('LinkedIn Profile Refresh', 400)">Add to Cart</button>
+    </div>
+    <div class="service">
+      <h3>Job Seeker Bundle – R1200</h3>
+      <p>Resume, Cover Letter, and LinkedIn profile – all in one package.</p>
+      <button onclick="addToCart('Job Seeker Bundle', 1200)">Add to Cart</button>
+    </div>
+    <div class="checkout-btn">
+      <button onclick="toggleDrawer()">🛒 View Cart & Checkout</button>
     </div>
   </section>
 
-  <section class="contact" id="contact">
-    <h2>Contact Us</h2>
-    <p>Email us at: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Your Next Role helps job seekers present themselves professionally and confidently with expertly written resumes, tailored cover letters, and polished LinkedIn profiles.</p>
   </section>
 
-  <div id="popup" class="popup">
-    <p>Thank you for your order! We've received your request.</p>
-    <button onclick="document.getElementById('popup').classList.remove('show')">Close</button>
-  </div>
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p>
+  </section>
 
-  <footer class="footer">
-    &copy; 2025 Your Next Role • danelloosthuizen3@gmail.com
+  <footer>
+    <p>&copy; 2025 Your Next Role. All rights reserved.</p>
   </footer>
 
+  <!-- Checkout Drawer -->
+  <div id="drawer" class="drawer">
+    <button class="close-btn" onclick="toggleDrawer()">&times;</button>
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>Total:</strong> R<span id="total-price">0</span></p>
+    <form onsubmit="submitOrder(event)">
+      <label>Name:</label>
+      <input type="text" required />
+      <label>Email:</label>
+      <input type="email" required />
+      <label>Any Notes:</label>
+      <textarea rows="4"></textarea>
+      <button type="submit">Place Order</button>
+    </form>
+    <div id="popup" class="popup">
+      <p>✅ Thank you for your order! We’ll be in touch via email.</p>
+    </div>
+  </div>
+
   <script>
-    const cart = [];
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    function toggleDrawer() {
+      document.getElementById("drawer").classList.toggle("show");
+    }
 
     function addToCart(service, price) {
       cart.push({ service, price });
-      updateCartCount();
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(service + " added to cart!");
     }
 
-    function updateCartCount() {
-      const cartCount = document.getElementById("cart-count");
-      if (cartCount) cartCount.textContent = cart.length;
+    function displayCart() {
+      const list = document.getElementById("cart-items");
+      const total = document.getElementById("total-price");
+      let sum = 0;
+      list.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.service} – R${item.price}`;
+        list.appendChild(li);
+        sum += item.price;
+      });
+      total.textContent = sum;
     }
 
-    function showThankYouPopup() {
-      const popup = document.getElementById("popup");
-      popup.classList.add("show");
-      cart.length = 0;
-      updateCartCount();
+    function submitOrder(e) {
+      e.preventDefault();
+      localStorage.removeItem("cart");
+      cart = [];
+      displayCart();
+      document.getElementById("popup").classList.add("show");
+      setTimeout(() => {
+        document.getElementById("popup").classList.remove("show");
+        toggleDrawer();
+      }, 4000);
     }
+
+    displayCart();
   </script>
 </body>
 </html>
