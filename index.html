@@ -8,16 +8,39 @@
   <meta property="og:image" content="/og-image.jpg">
   <link rel="icon" type="image/png" href="/favicon.png" />
   <style>
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7fc; }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7fc; display: flex; }
     header, footer { background: #0070f3; color: white; padding: 1.5rem; text-align: center; }
     h1, h2 { margin: 0.5em 0; }
-    nav { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
-    nav a { color: white; text-decoration: none; font-weight: bold; }
-    section { max-width: 900px; margin: 2rem auto; padding: 1rem; }
+    .sidebar {
+      width: 220px;
+      background: #0070f3;
+      color: white;
+      padding: 2rem 1rem;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .sidebar p { font-size: 0.9rem; margin-bottom: 2rem; text-align: center; }
+    .sidebar nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 1rem 0;
+      display: block;
+    }
+    main {
+      margin-left: 220px;
+      flex: 1;
+      padding: 2rem;
+    }
     .service { background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 1rem; }
     .service button { background: #0070f3; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; }
 
-    /* Fixed Checkout Button */
     .fixed-checkout-btn {
       position: fixed;
       bottom: 20px;
@@ -39,7 +62,6 @@
       background: linear-gradient(to right, #0051a3, #003e7e);
     }
 
-    /* Drawer Styles */
     .drawer {
       position: fixed;
       top: 0;
@@ -80,59 +102,59 @@
   </style>
 </head>
 <body>
-  <header>
+  <div class="sidebar">
     <h1>Your Next Role</h1>
-    <p>Professional Resume & Career Branding Services</p>
+    <p>Resume & Career Branding Services</p>
     <nav>
       <a href="#services">Services</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
-  </header>
-
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="service">
-      <h3>Resume Revamp – R450</h3>
-      <p>ATS-friendly formatting and keyword-optimized content.</p>
-      <button onclick="addToCart('Resume Revamp', 450)">Add to Cart</button>
-    </div>
-    <div class="service">
-      <h3>Resume + Cover Letter – R550</h3>
-      <p>Includes Resume Revamp and a professional cover letter.</p>
-      <button onclick="addToCart('Resume + Cover Letter', 550)">Add to Cart</button>
-    </div>
-    <div class="service">
-      <h3>LinkedIn Profile Refresh – R400</h3>
-      <p>Optimized LinkedIn headline, summary, and experience section.</p>
-      <button onclick="addToCart('LinkedIn Profile Refresh', 400)">Add to Cart</button>
-    </div>
-    <div class="service">
-      <h3>Job Seeker Bundle – R1200</h3>
-      <p>Resume, Cover Letter, and LinkedIn profile – all in one package.</p>
-      <button onclick="addToCart('Job Seeker Bundle', 1200)">Add to Cart</button>
-    </div>
-  </section>
-
-  <div class="fixed-checkout-btn">
-    <button onclick="toggleDrawer()">🛒 View Cart & Checkout</button>
   </div>
+  <main>
+    <section id="services">
+      <h2>Our Services</h2>
+      <div class="service">
+        <h3>Resume Revamp – R450</h3>
+        <p>ATS-friendly formatting and keyword-optimized content.</p>
+        <button onclick="addToCart('Resume Revamp', 450)">Add to Cart</button>
+      </div>
+      <div class="service">
+        <h3>Resume + Cover Letter – R550</h3>
+        <p>Includes Resume Revamp and a professional cover letter.</p>
+        <button onclick="addToCart('Resume + Cover Letter', 550)">Add to Cart</button>
+      </div>
+      <div class="service">
+        <h3>LinkedIn Profile Refresh – R400</h3>
+        <p>Optimized LinkedIn headline, summary, and experience section.</p>
+        <button onclick="addToCart('LinkedIn Profile Refresh', 400)">Add to Cart</button>
+      </div>
+      <div class="service">
+        <h3>Job Seeker Bundle – R1200</h3>
+        <p>Resume, Cover Letter, and LinkedIn profile – all in one package.</p>
+        <button onclick="addToCart('Job Seeker Bundle', 1200)">Add to Cart</button>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Your Next Role helps job seekers present themselves professionally and confidently with expertly written resumes, tailored cover letters, and polished LinkedIn profiles.</p>
-  </section>
+    <div class="fixed-checkout-btn">
+      <button onclick="toggleDrawer()">🛒 View Cart & Checkout</button>
+    </div>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p>
-  </section>
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Your Next Role helps job seekers present themselves professionally and confidently with expertly written resumes, tailored cover letters, and polished LinkedIn profiles.</p>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 Your Next Role. All rights reserved.</p>
-  </footer>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:danelloosthuizen3@gmail.com">danelloosthuizen3@gmail.com</a></p>
+    </section>
 
-  <!-- Checkout Drawer -->
+    <footer>
+      <p>&copy; 2025 Your Next Role. All rights reserved.</p>
+    </footer>
+  </main>
+
   <div id="drawer" class="drawer">
     <button class="close-btn" onclick="toggleDrawer()">&times;</button>
     <h2>Your Cart</h2>
