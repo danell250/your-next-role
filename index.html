@@ -3,210 +3,168 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Next Role | yournextrole.netlify.app</title>
-  <meta name="description" content="Professional resume writing, cover letters, and LinkedIn optimization services tailored to help you land your next role." />
-  <meta property="og:title" content="Your Next Role | Resume & Career Branding Services" />
-  <meta property="og:description" content="Get ATS-optimized resumes, personalized cover letters, and standout LinkedIn profiles. Start landing more interviews today!" />
-  <meta property="og:image" content="https://yournextrole.netlify.app/og-image.jpg" />
-  <meta property="og:url" content="https://yournextrole.netlify.app" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Your Next Role | Resume & Career Branding Services" />
-  <meta name="twitter:description" content="Professional resume writing and job search branding to help you land your next opportunity." />
-  <meta name="twitter:image" content="https://yournextrole.netlify.app/og-image.jpg" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <meta name="description" content="Professional resume, cover letter, and LinkedIn optimization services." />
+  <meta property="og:title" content="Your Next Role" />
+  <meta property="og:description" content="Stand out and land your dream job with expert resume services." />
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <title>Your Next Role</title>
   <style>
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
-      background-color: #f7f9fc;
-      color: #1f2937;
-      scroll-behavior: smooth;
+      padding: 0;
+      line-height: 1.6;
     }
     header {
-      background-color: #1e3a8a;
+      background: #004080;
       color: white;
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    nav {
+      padding: 1rem;
       display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1rem;
+      justify-content: space-between;
+      align-items: center;
     }
     nav a {
       color: white;
+      margin: 0 1rem;
       text-decoration: none;
-      font-weight: 600;
     }
-    .cart-icon {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: #2563eb;
+    .services, .about, .testimonials, .contact {
+      padding: 2rem;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .btn {
+      background: linear-gradient(to right, #0066cc, #0099ff);
+      border: none;
       color: white;
       padding: 0.5rem 1rem;
-      border-radius: 8px;
+      margin-left: 1rem;
+      border-radius: 25px;
       cursor: pointer;
+    }
+    .btn:hover {
+      opacity: 0.9;
     }
     .cart-popup {
       display: none;
       position: fixed;
-      top: 80px;
+      top: 60px;
       right: 20px;
-      width: 300px;
       background: white;
       border: 1px solid #ccc;
       padding: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
       z-index: 1000;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-    .cart-popup h3 {
-      margin-top: 0;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-    }
-    .btn, form button {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background-color: #2563eb;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      border: none;
+    .cart-icon {
       cursor: pointer;
-    }
-    .btn:hover, form button:hover {
-      background-color: #1d4ed8;
-    }
-    .services button {
-      margin-top: 0.5rem;
-    }
-    section {
-      max-width: 960px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    h2 {
-      color: #1e3a8a;
-    }
-    .services, .about, .contact, .testimonials, .book {
-      background: white;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      font-weight: bold;
     }
     .testimonial {
-      background-color: #f1f5f9;
+      background: #f9f9f9;
       padding: 1rem;
-      border-left: 4px solid #2563eb;
+      border-left: 5px solid #004080;
       margin-bottom: 1rem;
-      border-radius: 6px;
     }
-    .testimonial p {
-      margin: 0 0 0.5rem;
-    }
-    .testimonial cite {
-      font-style: normal;
-      color: #555;
-      font-size: 0.9rem;
-    }
-    .footer {
+    footer {
+      background: #eee;
       text-align: center;
-      padding: 2rem;
-      font-size: 0.875rem;
-      background-color: #e5e7eb;
-    }
-    form input, form textarea {
-      width: 100%;
-      padding: 0.75rem;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-family: 'Inter', sans-serif;
+      padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Your Next Role</h1>
-    <p>Resume Writing & Career Branding Services</p>
     <nav>
-      <a href="#about">About</a>
       <a href="#services">Services</a>
+      <a href="#about">About</a>
       <a href="#testimonials">Testimonials</a>
-      <a href="#book">Book Now</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="cart-icon" onclick="toggleCart()">🛒 View Cart (<span id="cart-count">0</span>)</div>
-    <div class="cart-popup" id="cart">
-      <h3>Your Cart</h3>
-      <div id="cart-items"></div>
-      <p><strong>Total:</strong> R<span id="cart-total">0</span></p>
-      <button onclick="checkoutCart()">Checkout</button>
-    </div>
+    <div class="cart-icon" onclick="toggleCart()">Cart 🛒</div>
   </header>
 
-  <!-- Sections remain unchanged until services -->
-  <section class="services" id="services" data-aos="fade-up">
-    <h2>Services</h2>
+  <div class="cart-popup" id="cart">
+    <h3>Your Cart</h3>
+    <div id="cart-items"></div>
+    <p><strong>Total:</strong> R<span id="total">0</span></p>
+    <button class="btn" onclick="checkout()">Checkout with PayPal</button>
+  </div>
+
+  <section class="services" id="services">
+    <h2>Our Services</h2>
     <ul>
-      <li><strong>Resume Revamp – R450:</strong> ATS-friendly formatting and keyword-optimized content. <br><button onclick="addToCart('Resume Revamp', 450)">Add to Cart</button></li>
-      <li><strong>Resume + Cover Letter – R550:</strong> Resume + tailored cover letter. <br><button onclick="addToCart('Resume + Cover Letter', 550)">Add to Cart</button></li>
-      <li><strong>LinkedIn Profile Refresh – R400:</strong> Headline, summary, and experience optimization. <br><button onclick="addToCart('LinkedIn Profile Refresh', 400)">Add to Cart</button></li>
-      <li><strong>Job Seeker Bundle – R1200:</strong> Resume + Cover Letter + LinkedIn. <br><button onclick="addToCart('Job Seeker Bundle', 1200)">Add to Cart</button></li>
+      <li>Resume Revamp – R450 <button class="btn" onclick="addToCart('Resume Revamp', 450)">Add to Cart</button></li>
+      <li>Resume + Cover Letter – R550 <button class="btn" onclick="addToCart('Resume + Cover Letter', 550)">Add to Cart</button></li>
+      <li>LinkedIn Profile Refresh – R400 <button class="btn" onclick="addToCart('LinkedIn Profile Refresh', 400)">Add to Cart</button></li>
+      <li>Job Seeker Bundle – R1200 <button class="btn" onclick="addToCart('Job Seeker Bundle', 1200)">Add to Cart</button></li>
     </ul>
-    <a href="#book" class="btn">Book a Free Resume Audit</a>
   </section>
 
-  <!-- Rest of page remains unchanged -->
+  <section class="about" id="about">
+    <h2>About Us</h2>
+    <p>We help job seekers stand out with professionally written, ATS-optimized resumes, compelling cover letters, and impactful LinkedIn profiles.</p>
+  </section>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <section class="testimonials" id="testimonials">
+    <h2>Testimonials</h2>
+    <div class="testimonial">
+      <p>“My resume landed me 3 interviews in one week! Thank you!”</p>
+      <cite>– Lindiwe M.</cite>
+    </div>
+    <div class="testimonial">
+      <p>“Super professional and fast turnaround. Highly recommend.”</p>
+      <cite>– Sizwe T.</cite>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/mwkgeqjy" method="POST">
+      <label>Name</label>
+      <input type="text" name="name" required>
+      <label>Email</label>
+      <input type="email" name="email" required>
+      <label>Message</label>
+      <textarea name="message" rows="5" required></textarea>
+      <button type="submit" class="btn">Send</button>
+    </form>
+  </section>
+
+  <footer class="footer">
+    &copy; 2025 Your Next Role • danelloosthuizen3@gmail.com
+  </footer>
+
   <script>
-    AOS.init();
-
-    let cart = [];
-
+    const cart = [];
     function toggleCart() {
-      const cartEl = document.getElementById('cart');
-      cartEl.style.display = cartEl.style.display === 'block' ? 'none' : 'block';
+      const cartPopup = document.getElementById("cart");
+      cartPopup.style.display = cartPopup.style.display === "block" ? "none" : "block";
     }
 
-    function addToCart(item, price) {
-      cart.push({ item, price });
+    function addToCart(service, price) {
+      cart.push({ service, price });
       updateCart();
     }
 
     function updateCart() {
-      const cartItems = document.getElementById('cart-items');
-      const cartCount = document.getElementById('cart-count');
-      const cartTotal = document.getElementById('cart-total');
-      cartItems.innerHTML = '';
-
+      const cartItems = document.getElementById("cart-items");
+      cartItems.innerHTML = "";
       let total = 0;
-      cart.forEach((entry, i) => {
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML = `${entry.item} - R${entry.price} <button onclick="removeItem(${i})">×</button>`;
+      cart.forEach((item, index) => {
+        total += item.price;
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `${item.service} - R${item.price} <span onclick="removeItem(${index})" style="cursor:pointer;color:red;">×</span>`;
         cartItems.appendChild(div);
-        total += entry.price;
       });
-
-      cartCount.textContent = cart.length;
-      cartTotal.textContent = total;
+      document.getElementById("total").textContent = total;
     }
 
     function removeItem(index) {
@@ -214,14 +172,33 @@
       updateCart();
     }
 
-    function checkoutCart() {
-      if (cart.length === 0) {
-        alert("Your cart is empty.");
-        return;
-      }
-      const services = cart.map(c => c.item + ' (R' + c.price + ')').join(', ');
-      const mailto = `mailto:danelloosthuizen3@gmail.com?subject=Service Booking&body=I would like to book the following: ${services}`;
-      window.location.href = mailto;
+    function checkout() {
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      const description = cart.map(item => item.service).join(", ");
+      const form = document.createElement('form');
+      form.action = "https://www.paypal.com/cgi-bin/webscr";
+      form.method = "POST";
+      form.target = "_blank";
+
+      const inputs = [
+        { name: "cmd", value: "_xclick" },
+        { name: "business", value: "danelloosthuizen3@gmail.com" },
+        { name: "currency_code", value: "ZAR" },
+        { name: "amount", value: total },
+        { name: "item_name", value: description },
+      ];
+
+      inputs.forEach(i => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = i.name;
+        input.value = i.value;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
     }
   </script>
 </body>
